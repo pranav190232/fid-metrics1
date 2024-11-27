@@ -1,0 +1,26 @@
+import matplotlib.pyplot as plt
+
+def plot_scores(fid_scores, fvd_scores):
+    plt.figure(figsize=(12, 8))
+    plt.scatter(fvd_scores, fid_scores, color='red', marker='o', label='Scores')
+    plt.plot(fvd_scores, fid_scores, color='green', linestyle='--', linewidth=2)
+    plt.xlabel('FVD Scores', fontsize=14, fontweight='bold')
+    plt.ylabel('FID Scores', fontsize=14, fontweight='bold')
+    plt.title('FID vs FVD Scores', fontsize=18, fontweight='bold')
+    plt.legend(loc='upper right', fontsize=12)
+    plt.grid(True, which='both', linestyle='--', linewidth=0.5)
+    plt.gca().set_facecolor('lightgray')
+    for fvd, fid in zip(fvd_scores, fid_scores):
+        plt.annotate(f"({fvd:.16f}, {fid:.16f})", (fvd, fid), textcoords="offset points", xytext=(0,10), ha='center')
+    plt.show()
+
+# Example Usage
+if __name__ == "__main__":
+    fid_scores = [] # Define your FID scores here
+    fvd_scores = []  # Define your FVD scores here
+
+    if len(fid_scores) != len(fvd_scores):
+        print("Error: The number of FID and FVD scores must be the same.")
+        exit(1)
+
+    plot_scores(fid_scores, fvd_scores)
